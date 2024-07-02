@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useRoutes } from "react-router";
 import "./App.css";
-import logo from "./logo.svg";
+import routes from "./routes";
 import { sayHello } from "./service";
-import { Counter } from "./store/features/Counter";
 
 function App() {
+  const elements = useRoutes(routes);
+  console.log("elements", elements);
   const [helloMes, sethelloMes] = useState("changing...");
   const getHello = async () => {
     const res = await sayHello();
@@ -15,11 +17,9 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter></Counter>
-        <h3>{helloMes} </h3>
-      </header>
+      <h3>{helloMes} </h3>
+
+      {elements}
     </div>
   );
 }
